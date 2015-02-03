@@ -1,0 +1,48 @@
+#change-log dd{
+    padding-left: 10px;
+}
+
+/***** Code colors *****/
+.html-code {
+    margin-top: 20px;
+}
+.well .html-code:before {
+    content: "HTML Code";
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #999;
+}
+.well .js-code:before {
+    content: "JS Code";
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #999;
+}
+
+#alert {
+    display: none;
+}
+
+.date-bg {
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+}
+
+.page-footer .container {
+    height: 50px;
+    border-top: 1px solid #CCC;
+    padding-top: 15px;
+}
+
+.p {}
+.nx {}
+.s {color: #d44950;}
+.s1 {color: #C30;}
+.na {color: #4f9fcf;}
+.nt {color: #2f6f9f;}
+.kc {color: #069;}
+.kv {color: #64A2A2;}
+.c1 {color: #999;}

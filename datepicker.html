@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Datepicker for Bootstrap. Examples and instructions.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--CSS including-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="source/datepicker.css">
+    <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+    <header class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Datepicker for Bootstrap <small>bootstrap-datepicker.js v 1.0</small></h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <section class="row">
+            <aside class="col-md-3">
+                <article id="about">
+                    <h3>About</h3>
+                    <p>Add datepicker picker to field or to any other element.</p>
+                    <ul>
+                        <li>Can be used as a component</li>
+                        <li>Formats: dd, d, mm, m, yyyy, yy</li>
+                        <li>Separators: -, /, .</li>
+                    </ul>
+                    <p>Original by Stefan Petre (<a href="http://www.eyecon.ro/bootstrap-datepicker">http://www.eyecon.ro/bootstrap-datepicker</a>).</p>
+                    <p>Plugin update and tutorial by Lev Leschiner (<a href="http://leschiner.ru">http://leschiner.ru</a>).</p>
+                </article>
+                <article id="change-log">
+                    <h3>Change log</h3>
+                    <dl>
+                       <dt>02/02/2015</dt>
+                        <dd>As soon as main author of this extension don`t change it from 12/03/2013, some issues based on changes of Bootstrap core was fixed.</dd>
+                        <dd>CSS minor fixes</dd>
+                        <dd>More detailed tutorial (example list) created.</dd>
+                        <dd>onRender moved from Events to the Options (because it is actually not event).</dd>
+                        <dd>onStart option added</dd>
+                        <dd>autoClose option added</dd>
+                    </dl>
+                </article>
+            </aside>
+            <section class="col-md-9">
+                <h2>Basic usage</h2>
+                <p>Call the datepicker via javascript:</p>
+                <div class="js-code">
+                    <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span></code></pre>
+                </div>
+                <h3>Options</h3>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">Name</th>
+                            <th style="width: 110px;">type</th>
+                            <th style="width: 100px;">default</th>
+                            <th>description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>format</td>
+                            <td>string</td>
+                            <td>'mm/dd/yyyy'</td>
+                            <td>The date format, combination of  <code>d, dd, m, mm, yy, yyyy</code> and separators <code>-,/,.</code></td>
+                        </tr>
+                        <tr>
+                            <td>weekStart</td>
+                            <td>integer</td>
+                            <td>0</td>
+                            <td>Day of the week start. 0 for Sunday -  6 for Saturday</td>
+                        </tr>
+                        <tr>
+                            <td>autoClose</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>If true, datepicker will close after date selection. If false, datepicker will be open until user click outside the datepicker.</td>
+                        </tr>
+                        <tr>
+                            <td>viewMode</td>
+                            <td>string | integer</td>
+                            <td>0 = 'days'</td>
+                            <td>Set the start view mode. Accepts: <code>'days'</code>, <code>'months'</code>, <code>'years'</code>, <code>0</code> for days, <code>1</code> for months and <code>2</code> for years</td>
+                        </tr>
+                        <tr>
+                            <td>minViewMode</td>
+                            <td>string | integer</td>
+                            <td>0 = 'days'</td>
+                            <td>Set a limit for view mode. Accepts: <code>'days'</code>, <code>'months'</code>, <code>'years'</code>, <code>0</code> for days, <code>1</code> for months and <code>2</code> for years</td>
+                        </tr>
+                        <tr>
+                            <td>onStart</td>
+                            <td>function</td>
+                            <td>''</td>
+                            <td>This function is used when the datepicker is called. Should have a <code>date</code> as parameter and this parameter filled with date from input value or form group data tag.</td>
+                        </tr>
+                        <tr>
+                            <td>onRender</td>
+                            <td>function</td>
+                            <td>''</td>
+                            <td>This function is used when a day is rendered inside the datepicker. Should have a <code>date</code> as parameter. Should return a string, in fact the class name(s).
+                                <br/> Return <code>'disabled'</code> to disable the day from being selected.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3>Markup</h3>
+                <p>Simple input.</p>
+                <div class="html-code">
+                      <pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">value=</span><span class="s">"12-01-2015"</span> <span class="na">id=</span><span class="s">"myInput"</span> <span class="nt">/&gt;</span></code></pre>
+                </div>
+                <p>Or as input group.</p>
+                <div class="html-code">
+                    <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"input-group date"</span> <span class="na">id=</span><span class="s">"myInput"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">value=</span><span class="s">"12/01/2015"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"input-group-addon"</span><span class="nt">&gt;</span><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"glyphicon glyphicon-calendar"</span><span class="nt">&gt;&lt;/i&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                </div>
+                Options for datepicker also could be included as data tags in the markup. Current (onload) date mentioned as <code>data-date="01-01-1990"</code>. All over options starts with prefix <code>data-date-</code>, namely <code>data-date-format</code>, <code>data-date-viewmode</code> and <code>data-date-minviewmode</code>.
+                <h3>Methods</h3>
+                <h4>$().datepicker(options)</h4>
+                <p>Initializes an datepicker.</p>
+                <div class="js-code">
+                    <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({
+    </span><span class="na">format</span><span class="p">:</span> <span class="kc">'dd-mm-yyyy'</span>
+<span class="p">});</span></code></pre>
+                </div>
+                <h4>.datepicker('show')</h4>
+                <p>Show the datepicker.</p>
+                <div class="js-code">
+                    <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">(</span><span class="s1">'show'</span><span class="p">);</span></code></pre>
+                </div>
+                <h4>.datepicker('hide')</h4>
+                <p>Hide the datepicker.</p>
+                <div class="js-code">
+                    <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">(</span><span class="s1">'hide'</span><span class="p">);</span></code></pre>
+                </div>
+                <h4>.datepicker('place')</h4>
+                <p>Updates the date picker's position relative to the element</p>
+                <div class="js-code">
+                    <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">(</span><span class="s1">'place'</span><span class="p">);</span></code></pre>
+                </div>
+                <h4>.datepicker('setValue', value)</h4>
+                <p>Set a new value for the datepicker. It cand be a string in the specified format or a Date object.</p>
+                <div class="js-code">
+                    <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">(</span><span class="s1">'setValue'</span><span class="p">,</span> <span class="kc">value</span><span class="p">);</span></code></pre>
+                </div>
+                <h3>Events</h3>
+                <p>Datepicker class exposes a few events for manipulating the dates.</p>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th style="width: 150px;">Event</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>show</td>
+                        <td>This event fires immediately when the date picker is displayed.</td>
+                    </tr>
+                    <tr>
+                        <td>hide</td>
+                        <td>This event is fired immediately when the date picker is hidden.</td>
+                    </tr>
+                    <tr>
+                        <td>changeDate</td>
+                        <td>This event is fired when the date is changed.</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h2>Examples</h2>
+                <form class="form-inline">
+                    <p>Attached to a field with the format specified via options.</p>
+                    <div class="well">
+                        <div class="form-group">
+                            <label for="dp1">Choose date:</label>
+                            <input type="text" class="form-control" value="12-01-2015" id="dp1" />
+                        </div>
+                        <div class="html-code">
+                            <pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">value=</span><span class="s">"12-01-2015"</span> <span class="na">id=</span><span class="s">"myInput"</span> <span class="nt">/&gt;</span></code></pre>
+                        </div>
+                        <div class="js-code">
+                            <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span><span class="na">format</span><span class="p">:</span> <span class="kc">'dd-mm-yyyy'</span><span class="p">});</span></code></pre>
+                        </div>
+                    </div>
+                    <p>Attachet to a field with the format specified via data tag.</p>
+                    <div class="well">
+                        <div class="form-group">
+                            <label for="dp1">Choose date:</label>
+                            <input type="text" class="form-control" value="12/01/15" data-date-format="dd/mm/yy" id="dp2" />
+                        </div>
+                        <div class="html-code">
+                            <pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">value=</span><span class="s">"12/01/2015"</span> <span class="na">data-date-format=</span><span class="s">"dd/mm/yy"</span> <span class="na">id=</span><span class="s">"myInput"</span> <span class="nt">/&gt;</span></code></pre>
+                        </div>
+                        <div class="js-code">
+                            <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span></code></pre>
+                        </div>
+                    </div>
+                    <p>As input group.</p>
+                    <div class="well">
+                        <div class="form-group">
+                            <label for="dp3">Choose date:</label>
+                            <div class="input-group date" id="dp3" data-date="12-01-2015" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control" value="12-01-2015" readonly />
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="html-code">
+                            <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"input-group date"</span> <span class="na">id=</span><span class="s">"myInput"</span> <span class="na">data-date=</span><span class="s">"12-01-2015"</span> <span class="na">data-date-format=</span><span class="s">"dd-mm-yyyy"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">value=</span><span class="s">"12-01-2015"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"input-group-addon"</span><span class="nt">&gt;</span><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"glyphicon glyphicon-calendar"</span><span class="nt">&gt;&lt;/i&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </div>
+                        <div class="js-code">
+                            <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span></code></pre>
+                        </div>
+                    </div>
+                    <p>Start with years viewMode.</p>
+                    <div class="well">
+                        <div class="form-group">
+                            <label for="dpYears">Choose date:</label>
+                            <div class="input-group date" id="dpYears" data-date="12-01-2015" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                <input type="text" class="form-control" value="12-01-2015" readonly />
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="html-code">
+                            <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"input-group date"</span> <span class="na">id=</span><span class="s">"myInput"</span> <span class="na">data-date=</span><span class="s">"12-01-2015"</span> <span class="na">data-date-format=</span><span class="s">"dd-mm-yyyy"</span> <span class="na">data-date-viewmode=</span><span class="s">"years"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">value=</span><span class="s">"12-01-2015"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"input-group-addon"</span><span class="nt">&gt;</span><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"glyphicon glyphicon-calendar"</span><span class="nt">&gt;&lt;/i&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </div>
+                        <div class="js-code">
+                            <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span></code></pre>
+                        </div>
+                    </div>
+                    <p>Limit the view mode to months.</p>
+                    <div class="well">
+                        <div class="form-group">
+                            <label for="dpMonths">Choose date:</label>
+                            <div class="input-group date" id="dpMonths" data-date="01/2015" data-date-format="mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                <input type="text" class="form-control" value="01/2015" readonly />
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="html-code">
+                            <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"input-group date"</span> <span class="na">id=</span><span class="s">"myInput"</span> <span class="na">data-date=</span><span class="s">"01/2015"</span> <span class="na">data-date-format=</span><span class="s">"mm/yyyy"</span> <span class="na">data-date-viewmode=</span><span class="s">"years"</span> <span class="na">data-date-minviewmode=</span><span class="s">"months"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">value=</span><span class="s">"01/2015"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"input-group-addon"</span><span class="nt">&gt;</span><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"glyphicon glyphicon-calendar"</span><span class="nt">&gt;&lt;/i&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </div>
+                        <div class="js-code">
+                            <pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myInput'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span></code></pre>
+                        </div>
+                    </div>
+                    <p>Attached to other element then field and using events to work with the date values.</p>
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" id="alert">
+                                    <strong>Something went wrong!</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <strong>Start date</strong> <a href="#" class="btn btn-info btn-sm" id="dp4" data-date-format="dd-mm-yyyy" data-date="20-01-2015">Change</a>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <strong>End date</strong> <a href="#" class="btn btn-info btn-sm" id="dp5" data-date-format="dd-mm-yyyy" data-date="25-01-2015">Change</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="date-bg bg-success" id="startDate">20-01-2015</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="date-bg bg-success" id="endDate">25-01-2015</div>
+                            </div>
+                        </div>
+                        <div class="html-code">
+                            <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-12"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert alert-danger"</span> <span class="na">id=</span><span class="s">"alert"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;strong&gt;</span>Something went wrong!<span class="nt">&lt;/strong&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-3 text-center"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;strong&gt;</span>Start date<span class="nt">&lt;/strong&gt;</span> <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn btn-info btn-sm"</span> <span class="na">id=</span><span class="s">"dp4"</span> <span class="na">data-date-format=</span><span class="s">"dd-mm-yyyy"</span> <span class="na">data-date=</span><span class="s">"20-01-2015"</span><span class="nt">&gt;</span>Change<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-3 text-center"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;strong&gt;</span>End date<span class="nt">&lt;/strong&gt;</span> <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn btn-info btn-sm"</span> <span class="na">id=</span><span class="s">"dp5"</span> <span class="na">data-date-format=</span><span class="s">"dd-mm-yyyy"</span> <span class="na">data-date=</span><span class="s">"25-01-2015"</span><span class="nt">&gt;</span>Change<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-3"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"date-bg bg-success"</span> <span class="na">id=</span><span class="s">"startDate"</span><span class="nt">&gt;</span>20-01-2015<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-3"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"date-bg bg-success"</span> <span class="na">id=</span><span class="s">"endDate"</span><span class="nt">&gt;</span>25-01-2015<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </div>
+                        <div class="js-code">
+                            <pre><code class="language-js" data-lang="js"><span class="kc">var</span> <span class="kv">startDate</span><span class="p">;</span>
+<span class="kc">var</span> <span class="kv">endDate</span><span class="p">;</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#dp4'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span>
+    <span class="nx">onStart</span><span class="kc">: function</span><span class="p">(</span><span class="na">obj</span><span class="p">){</span>
+        <span class="kv">startDate</span> <span class="kc">= </span> <span class="na">obj</span>;
+    <span class="p">}</span>
+<span class="p">})</span><span class="p">.on(</span><span class="s1">'changeDate'</span><span class="p">,</span> <span class="kc">function</span><span class="p">(</span><span class="na">ev</span><span class="p">){</span>
+    <span class="kc">if</span> <span class="p">(</span><span class="na">ev</span><span class="p">.</span><span class="na">date</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="kc">></span> <span class="kv">endDate</span><span class="p">.</span><span class="p">getTime</span><span class="p">()){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#alert'</span><span class="p">).</span><span class="nx">show</span><span class="p">().</span><span class="nx">find</span><span class="p">(</span><span class="s1">'strong'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'The start date can not be greater then the end date!'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="kc">else</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#alert'</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+        <span class="kv">startDate</span> <span class="kc">= new</span> <span class="na">Date</span><span class="p">(</span><span class="na">ev</span>.<span class="na">date</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#startDate'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#dp4'</span>).<span class="na">data</span><span class="p">(</span><span class="s1">'date'</span>));
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">(</span><span class="kc">this</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">(</span><span class="s1">'hide'</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#dp5'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span>
+    <span class="nx">onStart</span><span class="kc">: function</span><span class="p">(</span><span class="na">obj</span><span class="p">){</span>
+        <span class="kv">endDate</span> <span class="kc">= </span> <span class="na">obj</span>;
+    <span class="p">}</span>
+<span class="p">})</span>.on<span class="p">(</span>'changeDate', <span class="kc">function</span><span class="p">(</span><span class="na">ev</span><span class="p">){</span>
+    <span class="kc">if</span> <span class="p">(</span><span class="na">ev</span><span class="p">.</span><span class="na">date</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="kc"><</span> <span class="kv">startDate</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#alert'</span><span class="p">).</span><span class="nx">show</span><span class="p">().</span><span class="nx">find</span><span class="p">(</span><span class="s1">'strong'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'The end date can not be less then the start date!'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="kc">else</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#alert'</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+        <span class="kv">endDate</span> <span class="kc">= new</span> <span class="na">Date</span><span class="p">(</span><span class="na">ev</span><span class="p">.</span><span class="na">date</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#endDate'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#dp5'</span><span class="p">).</span><span class="na">data</span><span class="p">(</span><span class="s1">'date'</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#dp5'</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">(</span><span class="s1">'hide'</span><span class="p">);</span>
+<span class="p">});</span></code></pre>
+                        </div>
+                    </div>
+                    <p>Disabling dates in the past and dependent disabling.</p>
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="dpd1">Check in:</label>
+                                    <input type="text" class="form-control" value="" id="dpd1" />
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label for="dpd2">Check out:</label>
+                                    <input type="text" class="form-control" value="" id="dpd2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="html-code">
+                            <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-6"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"dpd1"</span><span class="nt">&gt;</span>Check in:<span class="nt">&lt;/label&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">value=</span><span class="s">""</span> <span class="na">id=</span><span class="s">"dpd1"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-6"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"dpd2"</span><span class="nt">&gt;</span>Check out:<span class="nt">&lt;/label&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">value=</span><span class="s">""</span> <span class="na">id=</span><span class="s">"dpd2"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </div>
+                        <div class="js-code">
+                            <pre><code class="language-js" data-lang="js"><span class="kc">var</span> <span class="kv">nowTemp</span> <span class="kc">= new</span> <span class="na">Date</span><span class="p">();</span>
+<span class="kc">var</span> <span class="kv">now</span> <span class="kc">= new</span> <span class="na">Date</span><span class="p">(</span><span class="kv">nowTemp</span>.getFullYear(), <span class="kv">nowTemp</span>.getMonth(), <span class="kv">nowTemp</span>.getDate(), <span class="kc">0</span>, <span class="kc">0</span>, <span class="kc">0</span>, <span class="kc">0</span>);
+
+<span class="kc">var</span> <span class="kv">checkin</span> <span class="kc">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#dpd1'</span><span class="p">).</span>datepicker<span class="p">({</span>
+    onRender: <span class="kc">function</span><span class="p">(</span><span class="na">date</span><span class="p">) {</span>
+        <span class="kc">return</span> <span class="na">date</span>.valueOf() < <span class="kv">now</span>.valueOf() <span class="kc">?</span> <span class="s1">'disabled'</span> <span class="kc">:</span> <span class="s1">''</span>;
+    }
+<span class="p">}).</span>on(<span class="s1">'changeDate'</span>, <span class="kc">function</span><span class="p">(</span><span class="na">ev</span><span class="p">) {</span>
+    if (<span class="na">ev</span>.<span class="na">date</span>.valueOf() > <span class="kv">checkout</span>.<span class="na">date</span>.valueOf()) {
+        <span class="kc">var</span> <span class="kv">newDate</span> <span class="kc">= new</span> <span class="na">Date</span>(<span class="na">ev</span>.<span class="na">date</span>)
+        <span class="kv">newDate</span>.setDate(<span class="kv">newDate</span>.getDate() <span class="kc">+ 1</span>);
+        <span class="kv">checkout</span>.setValue(<span class="kv">newDate</span>);
+    }
+    <span class="kv">checkin</span>.hide();
+    <span class="nx">$</span>(<span class="s1">'#dpd2'</span>)[<span class="kc">0</span>].focus();
+}).<span class="na">data</span>(<span class="s1">'datepicker'</span>);
+<span class="kc">var</span> <span class="kv">checkout</span> <span class="kc">=</span> <span class="nx">$</span>(<span class="s1">'#dpd2'</span>).datepicker({
+    onRender: <span class="kc">function</span><span class="p">(</span><span class="na">date</span><span class="p">) {</span>
+        <span class="kc">return</span> <span class="na">date</span>.valueOf() <span class="kc"><=</span> <span class="kv">checkin</span>.<span class="na">date</span>.valueOf() <span class="kc">?</span> <span class="s1">'disabled'</span> <span class="kc">:</span> <span class="s1">''</span>;
+    }
+}).on(<span class="s1">'changeDate'</span>, <span class="kc">function</span><span class="p">() {</span>
+    <span class="kv">checkout</span>.hide();
+}).<span class="na">data</span>(<span class="s1">'datepicker'</span>);</code></pre>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </section>
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                   2015 © by Lev Leschiner (<a href="http://leschiner.ru">http://leschiner.ru</a>)
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--JS including-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="source/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function(){
+            window.prettyPrint && prettyPrint();
+            $('#dp1').datepicker({
+                format: 'dd-mm-yyyy'
+            });
+            $('#dp2').datepicker();
+            $('#dp3').datepicker();
+            $('#dpYears').datepicker();
+            $('#dpMonths').datepicker();
+
+            var startDate;
+            var endDate;
+            $('#dp4').datepicker({
+                onStart: function(obj){
+                    startDate = obj;
+                }
+            }).on('changeDate', function(ev){
+                    if (ev.date.getTime() > endDate.getTime()){
+                        $('#alert').show().find('strong').text('The start date can not be greater then the end date!');
+                    } else {
+                        $('#alert').hide();
+                        startDate = new Date(ev.date);
+                        $('#startDate').text($('#dp4').data('date'));
+                    }
+                    $(this).datepicker('hide');
+                });
+            $('#dp5').datepicker({
+                onStart: function(obj){
+                    endDate = obj;
+                }
+            }).on('changeDate', function(ev){
+                    if (ev.date.getTime() < startDate.getTime()){
+                        $('#alert').show().find('strong').text('The end date can not be less then the start date!');
+                    } else {
+                        $('#alert').hide();
+                        endDate = new Date(ev.date);
+                        $('#endDate').text($('#dp5').data('date'));
+                    }
+                    $(this).datepicker('hide');
+                });
+
+            // disabling dates
+            var nowTemp = new Date();
+            var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+            var checkin = $('#dpd1').datepicker({
+                onRender: function(date) {
+                    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+                }
+            }).on('changeDate', function(ev) {
+                if (ev.date.valueOf() > checkout.date.valueOf()) {
+                    var newDate = new Date(ev.date);
+                    newDate.setDate(newDate.getDate() + 1);
+                    checkout.setValue(newDate);
+                }
+                checkin.hide();
+                $('#dpd2')[0].focus();
+            }).data('datepicker');
+            var checkout = $('#dpd2').datepicker({
+                onRender: function(date) {
+                    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+                }
+            }).on('changeDate', function() {
+                checkout.hide();
+            }).data('datepicker');
+        });
+    </script>
+</body>
+</html>
