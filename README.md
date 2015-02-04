@@ -5,6 +5,7 @@ Original by [Stefan Petre](http://www.eyecon.ro/bootstrap-datepicker), renovate 
 Compatible with Bootstrap v3+.
 
 Website and tutorial: http://projects.lsch.ru/datepicker/
+
 Download: [datepicker.zip](http://projects.lsch.ru/datepicker/datepicker.zip)
 
 ## Installation

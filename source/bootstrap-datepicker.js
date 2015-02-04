@@ -1,6 +1,7 @@
 /* =========================================================
  * bootstrap-datepicker.js 
- * http://www.leschiner.ru/bootstrap-datepicker
+ * http://projects.lsch.ru/datepicker
+ * Version: 1.0.0
  * =========================================================
  * Copyright 2015 Lev Leschiner
  *
